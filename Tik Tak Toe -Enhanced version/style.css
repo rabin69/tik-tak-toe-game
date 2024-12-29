@@ -1,0 +1,311 @@
+/* Reset CSS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styles with background animation */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    background-size: 200% 200%;
+    animation: gradientAnimation 15s ease infinite;
+    padding: clamp(10px, 2vw, 20px);
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Container styles */
+.container {
+    color: white;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Title styles */
+h1 {
+    margin-bottom: clamp(15px, 4vw, 30px);
+    font-size: clamp(1.5rem, 5vw, 2.5em);
+    word-wrap: break-word;
+}
+
+/* Game wrapper styles */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .game-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
+
+/* Controls styles */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Game board styles */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(80px, 100px));
+    grid-gap: clamp(5px, 2vw, 10px);
+    margin: 0 auto;
+}
+
+.cell {
+    aspect-ratio: 1;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.5rem, 8vw, 2em);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+.cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0);
+    transition: transform 0.3s ease-out;
+    border-radius: 50%;
+}
+
+.cell:hover::before {
+    transform: scale(1);
+}
+
+.cell:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cell:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.cell.cell-filled {
+    animation: fillCell 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fillCell {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Buttons styles */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.reset-btn {
+    padding: clamp(8px, 2vw, 16px);
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: clamp(14px, 4vw, 16px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.reset-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
+    border-radius: 50%;
+}
+
+.reset-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reset-btn:hover::before {
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.reset-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Score board styles */
+.score-board {
+    width: 100%;
+    margin-bottom: clamp(10px, 3vw, 20px);
+}
+
+.score-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: clamp(14px, 4vw, 16px);
+    transition: transform 0.2s ease;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropbtn {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    padding: clamp(8px, 2vw, 16px);
+    font-size: clamp(14px, 4vw, 16px);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+    animation: dropdownAppear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: clamp(10px, 3vw, 16px);
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f8f9fa;
+    padding-left: calc(clamp(10px, 3vw, 16px) + 5px);
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: clamp(15px, 4vw, 30px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    text-align: center;
+    font-size: clamp(16px, 5vw, 24px);
+    width: 90%;
+    max-width: 300px;
+    animation: popupAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .cell:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .cell:active {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(0.95);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .cell:hover, .reset-btn:hover, .dropbtn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .cell:active, .reset-btn:active, .dropbtn:active {
+        transform: scale(0.95);
+    }
+}
